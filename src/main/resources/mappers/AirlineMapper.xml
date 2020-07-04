@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.service.base.mapper.AirlineMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.module.base.entity.Airline">
+        <id column="id" property="id" />
+        <result column="iataCode" property="iataCode" />
+        <result column="iacoCode" property="iacoCode" />
+        <result column="name" property="name" />
+        <result column="shortName" property="shortName" />
+        <result column="ordinal" property="ordinal" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, iataCode, iacoCode, name, shortName, ordinal
+    </sql>
+
+    <select id="findByQuery" resultType="com.module.base.entity.Airline">
+        select
+            airline.id,
+            airline.iataCode,
+            airline.iacoCode,
+            coalesce(i18n.localName,airline.name) as name,
+            airline.shortName,
+            airline.ordinal
+        from basic_airline airline left join basic_airline_i18n i18n
+        on airline.iataCode = i18n.refId and i18n.language = #{language}
+        <if test="query!=null and query!=''">
+            where airline.name like concat('%',#{query},'%')
+            or i18n.localName like concat('%',#{query},'%')
+            or airline.iataCode like concat('%',#{query},'%')
+        </if>
+    </select>
+
+</mapper>

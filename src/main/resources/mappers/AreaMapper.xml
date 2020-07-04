@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.service.base.mapper.AreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.module.base.entity.Area">
+        <id column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="parentCode" property="parentCode"/>
+        <result column="path" property="path"/>
+        <result column="level" property="level"/>
+        <result column="jianpin" property="jianpin"/>
+        <result column="pinyin" property="pinyin"/>
+        <result column="ordinal" property="ordinal"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        code, name, parentCode, path, level, jianpin, pinyin, ordinal, lng, lat
+    </sql>
+
+    <select id="findByLevel" resultType="com.module.base.entity.Area">
+        select
+            area.code,
+            coalesce(i18n.localName,area.name) as name,
+            area.parentCode,
+            area.path,
+            area.level,
+            area.jianpin,
+            area.pinyin,
+            area.ordinal,
+            area.lng,
+            area.lat
+        from basic_area area left join basic_area_i18n i18n
+        on area.code = i18n.refId and i18n.language = #{language}
+        where area.level = #{level}
+    </select>
+
+    <select id="findByParent" resultType="com.module.base.entity.Area">
+        select
+            area.code,
+            coalesce(i18n.localName,area.name) as name,
+            area.parentCode,
+            area.path,
+            area.level,
+            area.jianpin,
+            area.pinyin,
+            area.ordinal,
+            area.lng,
+            area.lat
+        from basic_area area left join basic_area_i18n i18n
+        on area.code = i18n.refId and i18n.language = #{language}
+        where area.parentCode = #{parentCode}
+    </select>
+
+    <select id="findByCode" resultType="com.module.base.entity.Area">
+        select
+            area.code,
+            coalesce(i18n.localName,area.name) as name,
+            area.parentCode,
+            area.path,
+            area.level,
+            area.jianpin,
+            area.pinyin,
+            area.ordinal,
+            area.lng,
+            area.lat
+        from basic_area area left join basic_area_i18n i18n
+        on area.code = i18n.refId and i18n.language = #{language}
+        where area.code = #{code}
+    </select>
+</mapper>
