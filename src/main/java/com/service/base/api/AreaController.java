@@ -28,7 +28,7 @@ public class AreaController extends BaseController implements AreaApi {
     private AreaService areaService;
 
     @Override
-    public ResultDto<List<Area>> country(Integer pageIndex, Integer pageSize, String sort, Boolean asc) {
+    public ResultDto<List<Area>> country(int pageIndex, int pageSize, String sort, boolean asc) {
         PageParam param = new PageParam(pageIndex, pageSize, sort, asc);
         return getResultDto(areaService.country(param));
     }
@@ -39,7 +39,7 @@ public class AreaController extends BaseController implements AreaApi {
     }
 
     @Override
-    public ResultDto<List<Area>> findByParent(String parentCode, Integer pageIndex, Integer pageSize, String sort, Boolean asc) {
+    public ResultDto<List<Area>> findByParent(String parentCode, int pageIndex, int pageSize, String sort, boolean asc) {
         PageParam param = new PageParam(pageIndex, pageSize, sort, asc);
         return getResultDto(areaService.findByParent(parentCode,param));
     }

@@ -28,7 +28,7 @@ public class AirlineController extends BaseController implements AirlineApi {
     private AirlineService airlineService;
 
     @Override
-    public ResultDto<List<Airline>> findListPage(String query, Integer pageIndex, Integer pageSize, String sort, Boolean asc) {
+    public ResultDto<List<Airline>> findListPage(String query, int pageIndex, int pageSize, String sort, boolean asc) {
         PageParam param = new PageParam(pageIndex, pageSize, sort, asc);
         return getResultDto(airlineService.findListPage(query,param));
     }
