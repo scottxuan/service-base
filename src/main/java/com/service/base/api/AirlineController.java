@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Api(tags = "20000--航司管理")
 @RestController
+@RequestMapping(AirlineApi.MAPPING)
 public class AirlineController extends BaseController implements AirlineApi {
     @Autowired
     private AirlineService airlineService;

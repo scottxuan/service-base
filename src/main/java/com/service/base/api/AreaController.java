@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Api(tags = "10000--区域管理")
 @RestController
+@RequestMapping(AreaApi.MAPPING)
 public class AreaController extends BaseController implements AreaApi {
     @Autowired
     private AreaService areaService;
