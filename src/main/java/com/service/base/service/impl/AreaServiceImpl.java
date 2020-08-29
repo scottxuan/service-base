@@ -1,6 +1,5 @@
 package com.service.base.service.impl;
 
-import com.google.common.collect.Lists;
 import com.module.base.entity.Area;
 import com.scottxuan.base.page.PageParam;
 import com.scottxuan.base.result.ResultBo;
@@ -48,17 +47,11 @@ public class AreaServiceImpl extends BaseServiceImpl<Area> implements AreaServic
     @Override
     @EnablePage
     public PageResult<Area> findByParent(String parentCode, PageParam param) {
-        if (StringUtils.isBlank(parentCode)) {
-            return PageResult.empty();
-        }
         return PageResult.of(areaMapper.findByParent(parentCode,"en-US"));
     }
 
     @Override
     public List<Area> findByParent(String parentCode) {
-        if (StringUtils.isBlank(parentCode)) {
-            return Lists.newArrayList();
-        }
         return areaMapper.findByParent(parentCode,"en-US");
     }
 

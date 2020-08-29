@@ -52,7 +52,14 @@
             area.lat
         from basic_area area left join basic_area_i18n i18n
         on area.code = i18n.refId and i18n.language = #{language}
-        where area.parentCode = #{parentCode}
+        <where>
+            <if test="parentCode = null or parentCode = ''">
+                and area.parentCode is null
+            </if>
+            <if test="parentCode != null and parentCode !=''">
+                and area.parentCode = #{parentCode}
+            </if>
+        </where>
     </select>
 
     <select id="findByCode" resultType="com.module.base.entity.Area">
