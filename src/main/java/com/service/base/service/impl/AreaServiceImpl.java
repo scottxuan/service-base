@@ -1,6 +1,8 @@
 package com.service.base.service.impl;
 
 import com.module.base.entity.Area;
+import com.module.system.identity.Identity;
+import com.module.system.identity.IdentityManager;
 import com.scottxuan.base.page.PageParam;
 import com.scottxuan.base.result.ResultBo;
 import com.scottxuan.core.page.EnablePage;
@@ -36,6 +38,8 @@ public class AreaServiceImpl extends BaseServiceImpl<Area> implements AreaServic
     @Override
     @EnablePage
     public PageResult<Area> country(PageParam param) {
+        Identity identity = IdentityManager.getCurrentUser();
+        System.out.println("--------------------"+identity.getName());
         return PageResult.of(areaMapper.findByLevel(1,"en-US"));
     }
 
